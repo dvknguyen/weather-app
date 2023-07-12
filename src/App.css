@@ -1,0 +1,22 @@
+
+#root {
+  height: 100vh;
+  background-image: linear-gradient(to right top ,green, skyblue);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.app-wrapper {
+  width:40vw;
+  height:90vh;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.title {
+  margin: 20px;
+  text-align: center;
+}
