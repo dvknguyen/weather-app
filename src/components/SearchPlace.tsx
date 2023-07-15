@@ -1,51 +1,33 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { getCities } from "../api/CityApi";
+const SearchPlace = () => {
+  const [userInput, setUserInput] = useState("");
 
-function SearchPlace() {
-  const [city, setCity] = useState<string>("");
-  const requestWeather = useQuery({
-    queryKey: ["get"],
-    queryFn: () =>
-      axios
-        .get(
-          "https://api.openweathermap.org/data/2.5/weather?lat=50.0782184&lon=8.2397608&appid=dbd3b02d8958d62185d02e944cd5f522"
-        )
-        .then((res) => res.data),
-  });
+  const { data, isLoading, isError } = getCities(userInput);
 
-  const requestLatLon = useQuery({
-    queryKey: ["getLatLon"],
-    queryFn: () =>
-      axios
-        .get(
-          "http://api.openweathermap.org/geo/1.0/direct?q=dresden&appid=dbd3b02d8958d62185d02e944cd5f522"
-        )
-        .then((res) => res.data),
-  });
-
-  const handleOnClick = () => {
-    requestLatLon;
-    if (requestLatLon.data) {
-      console.log(requestLatLon.data);
-    }
+  const handleUserInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setUserInput(event.target.value);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCity(e.target.value);
-  };
   return (
     <div>
       <input
-        value={city}
-        placeholder="enter your city"
-        onChange={handleChange}
-        id="city"
+        type="text"
+        value={userInput}
+        onChange={handleUserInputChange}
+        placeholder="Enter a location"
       />
-      <p>{city}</p>
-      <button onClick={handleOnClick}>Search</button>
+      {data?.map((data) => (
+        <div>
+          <p>{data.name}</p>
+          <p>{data.lon}</p>
+          <p>{data.lat}</p>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default SearchPlace;
