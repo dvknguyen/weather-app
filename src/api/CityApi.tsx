@@ -1,10 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-interface LocationData {
-  lat: string;
-  lon: string;
-  name: string;
-}
+import { LocationData } from "../interface/Interfaces";
 
 export const getCities = (userInput: string) =>
   useQuery<LocationData[]>(

@@ -1,16 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { LocationData, Weather } from "../interface/Interfaces";
 
-interface Weather {
-  cod: string;
-  message: number;
-}
-
-interface LocationData {
-  lat: string;
-  lon: string;
-  name: string;
-}
 export const getForcast5Days = (location: LocationData) =>
   useQuery<Weather>(["test1", location.lat, location.lon], async () => {
     const response = await axios.get<Weather>(
