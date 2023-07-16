@@ -10,23 +10,18 @@ const DisplayData: React.FC<any> = ({ forcastData }) => {
           Population: {forcastData?.city.population}
         </div>
       </div>
-
-      {forcastData?.list.map((element: any, index: any) => (
-        <div>
-          <span>{element.dt_txt} /</span>
-          <span>{element.main.feelslike} / </span>
-          <span>{element.main.humidity} / </span>
-          <span>{element.main.pressure} / </span>
-          <span>{element.main.temp} /</span>
-          <span>{element.main.temp_max} / </span>
-          <span>{element.main.temp_min}</span>
-          <span>{element.main.temp_min} </span>
-          <span>{element.weather[0].description}</span>
-          <img
-            src={`https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png`}
-          ></img>
-        </div>
-      ))}
+      <div className="weather-card-wrapper">
+        {forcastData?.list.map((element: any) => (
+          <div className="weather-card">
+            <div>Time: {new Date(element.dt_txt.toString()).getHours()}:00</div>
+            <img
+              src={`https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png`}
+            ></img>
+            <div>{element.main.temp}</div>
+            <div>{element.weather[0].description}</div>
+          </div>
+        ))}
+      </div>
     </>
   );
 };
