@@ -7,7 +7,7 @@ export const getCities = (userInput: string) =>
     ["location", userInput],
     async () => {
       const response = await axios.get<LocationData[]>(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=6&appid=dbd3b02d8958d62185d02e944cd5f522`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=6&appid=dbd3b02d8958d62185d02e944cd5f522`
       );
       return response.data;
     },
