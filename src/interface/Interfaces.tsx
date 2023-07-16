@@ -21,13 +21,15 @@ export type Weather = {
         temp_max: number;
         temp_min: number;
       };
+      weather: [
+        {
+          desciption: string;
+          icon: string;
+        }
+      ];
     }
   ];
-  weather: [
-    {
-      desciption: string;
-    }
-  ];
+
   wind: [
     {
       deg: number;

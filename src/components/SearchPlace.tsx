@@ -47,7 +47,7 @@ const SearchPlace = () => {
           </div>
         ))}
       </div>
-      {forcastData.isSuccess && <DisplayData weather={forcastData.data} />}
+      {forcastData.isSuccess && <DisplayData forcastData={forcastData.data} />}
     </div>
   );
 };
