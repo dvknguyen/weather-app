@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from "react";
 import { getCities } from "../api/CityApi";
 import { getForcast5Days } from "../api/Forcast5Days";
-import { LocationData, Weather } from "../interface/Interfaces";
+import { LocationData } from "../interface/Interfaces";
 import DisplayData from "./DisplayData";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -15,7 +15,7 @@ const SearchPlace = () => {
     name: "",
   });
 
-  const { data, isLoading, isError } = getCities(userInput);
+  const { data } = getCities(userInput);
   const forcastData = getForcast5Days(location);
 
   const handleUserInputChange = (
