@@ -4,9 +4,9 @@ import { getCities } from "../api/CityApi";
 import { getForcast5Days } from "../api/Forcast5Days";
 import { LocationData, Weather } from "../interface/Interfaces";
 import DisplayData from "./DisplayData";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
-let weather: Weather;
-let i: number = 0;
 const SearchPlace = () => {
   const [userInput, setUserInput] = useState("");
   const [location, setLocation] = useState<LocationData>({
@@ -16,7 +16,7 @@ const SearchPlace = () => {
   });
 
   const { data, isLoading, isError } = getCities(userInput);
-  const test = getForcast5Days(location);
+  const forcastData = getForcast5Days(location);
 
   const handleUserInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -29,18 +29,25 @@ const SearchPlace = () => {
   };
   return (
     <div>
-      <input
-        type="text"
-        value={userInput}
-        onChange={handleUserInputChange}
-        placeholder="Enter a location"
-      />
-      {data?.map((data) => (
-        <div>
-          <button onClick={() => handleOnclick(data)}>{data.name}</button>
+      <div className="search-wrapper">
+        <div className="search">
+          <TextField
+            id="search-city"
+            type="text"
+            label="Location"
+            variant="outlined"
+            value={userInput}
+            onChange={handleUserInputChange}
+            placeholder="Enter a location"
+          />
         </div>
-      ))}
-      <DisplayData greeting={test.data} />
+        {data?.map((data) => (
+          <div className="city-result">
+            <Button onClick={() => handleOnclick(data)}>{data.name}</Button>
+          </div>
+        ))}
+      </div>
+      {forcastData.isSuccess && <DisplayData weather={forcastData.data} />}
     </div>
   );
 };

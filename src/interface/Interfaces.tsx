@@ -4,7 +4,7 @@ export type LocationData = {
   name: string;
 };
 
-export interface Weather {
+export type Weather = {
   city: {
     country: string;
     name: string;
@@ -35,4 +35,4 @@ export interface Weather {
       speed: number;
     }
   ];
-}
+};
